@@ -5,7 +5,8 @@ using Bankrupt.Domain.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Bankrupt.CrossCutting.IoC{
+namespace Bankrupt.CrossCutting.IoC
+{
     public static class NativeInjector
     {
         public static void RegisterServices(IServiceCollection services)

@@ -37,10 +37,10 @@ namespace Bankrupt.Application.Service
         {
             var playerTypes = new Dictionary<PlayerType, string>
             {
-                { PlayerType.Random, GameResultResource.PlayerTypeRandom },
-                { PlayerType.Cautious, GameResultResource.PlayerTypeCautious },
+                { PlayerType.Impulsive, GameResultResource.PlayerTypeImpulsive },
                 { PlayerType.Demanding, GameResultResource.PlayerTypeDemanding },
-                { PlayerType.Impulsive, GameResultResource.PlayerTypeImpulsive }
+                { PlayerType.Cautious, GameResultResource.PlayerTypeCautious },
+                { PlayerType.Random, GameResultResource.PlayerTypeRandom }
             };
             return playerTypes;
         }
