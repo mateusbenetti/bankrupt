@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Análise estatistica do Bankrupt!";
+}
+@model GameModel
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<script src="~/js/gstatic/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(drawWinsByPlayerTypeChart);
+    @{
+        int i = 0;
+        int lastItem = Model.WinsByPlayerType.Count;
+    }
+    function drawWinsByPlayerTypeChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Comportamento', 'Número de Vitórias'],
+            @foreach (var item in Model.WinsByPlayerType)
+            {
+                var label = Html.Raw(item.Key);
+                i++;
+                var separatorValue = i == lastItem ? "" : ",";
+                var valueJson = $"['{label}', {item.Value}]{separatorValue}";
+                <text>
+                    @Html.Raw(valueJson)
+
+                </text>
+            }
+        ]);
+        var options = {
+            title: 'Vítórias por Comportamentos',
+            is3D: true
+        };
+        var chartPie = new google.visualization.PieChart(document.getElementById('piechart'));
+        chartPie.draw(data, options);
+    }
+</script>
+<div class="row">
+    <div class="col col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>@ViewData["Title"]</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col col-lg-10">
+                        
+                    </div>
+                    <div class="col col-lg-2">
+                        <a class="btn btn-primary" asp-area="" asp-controller="Game" asp-action="Index">Nova Simulação.</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-lg-4">
+                        <ul>
+                            <li>Total de partidas analisadas: @Model.NumberOfGames</li>
+                            <li>Máximo de rodados por partidas: @Model.MaxRoundByGames</li>
+                            <li>Número de partidas terminadas por Timeout: @Model.AmountFinishedByTimeout</li>
+                            <li>Média de rodadas por partida: @Model.AverageRounds</li>
+                            <li>
+                                Comportamento(s) mais vencedor(es):
+                                <ul>
+                                    @foreach (var player in Model.PlayersTypeMostWinner)
+                                    {
+                                        <li><b>@player</b></li>
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col col-lg-8">
+                        <div id="piechart" style="width: 600px; height: 400px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

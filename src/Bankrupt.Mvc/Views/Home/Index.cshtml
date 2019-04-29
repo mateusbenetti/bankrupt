@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Desafio Bankrupt";
+}
+<div class="row">
+    <div class="col col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>@ViewData["Title"]</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-9">
+                        O Desafio foi realizado com as seguintes caracteristicas:
+                        <ul>
+                            <li>
+                                <b>SDK:</b>   .NET Core 2.1.
+                            </li>
+                            <li>
+                                <b>Linguage: </b> C#
+                            </li>
+                            <li>
+                                <b>Patern:</b>  DDD
+                            </li>
+                            <li>
+                                <b> Pacotes de terceiros</b>:
+                                <ul>
+                                    <li>AutoMapper (8.1.0)</li>
+                                    <li>bootstrap 4.3.1</li>
+                                    <li>Google Charts</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-3">
+                        <a class="btn btn-primary" asp-area="" asp-controller="Game" asp-action="Index">Simular e Confir Análise</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

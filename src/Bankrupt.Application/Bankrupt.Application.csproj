@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bankrupt.Application.Resources\Bankrupt.Application.Resources.csproj" />
+    <ProjectReference Include="..\Bankrupt.Domain\Bankrupt.Domain.csproj" />
+    <ProjectReference Include="..\Bankrupt.Model\Bankrupt.Model.csproj" />
+  </ItemGroup>
+
+</Project>

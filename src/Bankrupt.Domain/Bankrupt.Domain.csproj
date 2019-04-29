@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bankrupt.Domain.Resources\Bankrupt.Domain.Resources.csproj" />
+    <ProjectReference Include="..\Bankrupt.Model\Bankrupt.Model.csproj" />
+  </ItemGroup>
+
+</Project>
