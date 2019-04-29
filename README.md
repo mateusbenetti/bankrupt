@@ -6,3 +6,7 @@ O projeto foi desenvolvido utilizando ASP.NET MVC Core (SDK: .NET Core 2.1), foi
 
 No projeto Bankrupt.Mvc, no arquivo appsettings.json configurar o path do arquivo de configuração das casas do tabuleiro do jogo:
 - Sessão ApplicationSettings, configuração GameConfigFilePath.
+
+Ao iniciar o jogo inicializará em um página com uma breve descrição, e um botão para realizar as simulações.
+
+Boa diversão!
