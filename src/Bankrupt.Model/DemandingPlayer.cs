@@ -6,9 +6,6 @@ namespace Bankrupt.Model
     {
         public override PlayerType Type => PlayerType.Demanding;
 
-        public override bool WantBuy(BoardHouse boardHouse)
-        {
-            return boardHouse.RentValue > 50;
-        }
+        public override bool WantBuy => CurrentBoardHouse.RentValue > 50;
     }
 }

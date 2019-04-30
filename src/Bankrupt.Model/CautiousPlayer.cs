@@ -6,10 +6,13 @@ namespace Bankrupt.Model
     {
         public override PlayerType Type => PlayerType.Cautious;
 
-        public override bool WantBuy(BoardHouse boardHouse)
+        public override bool WantBuy
         {
-            var cashAfterBuy = Coins - boardHouse.PurchaseValue;
-            return cashAfterBuy >= 80;
+            get
+            {
+                var cashAfterBuy = Coins - CurrentBoardHouse.PurchaseValue;
+                return cashAfterBuy >= 80;
+            }
         }
     }
 }

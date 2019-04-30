@@ -18,7 +18,7 @@ namespace Bankrupt.Domain
             else
             {
                 var playerHasCash = player.Coins >= player.CurrentBoardHouse.PurchaseValue;
-                if (playerHasCash && player.WantBuy(player.CurrentBoardHouse))
+                if (playerHasCash && player.WantBuy)
                     BuyBoardHouse(player, player.CurrentBoardHouse);
             }
             if (player.Coins < 0)

@@ -6,7 +6,7 @@ namespace Bankrupt.Model.Interface
     public interface IPlayer
     {
         PlayerType Type { get; }
-        bool WantBuy(BoardHouse boardHouse);
+        bool WantBuy { get;  }
         int Coins { get; set; }
         BoardHouse CurrentBoardHouse { get; set; }
         bool Playing { get; set; }

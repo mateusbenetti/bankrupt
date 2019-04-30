@@ -12,7 +12,7 @@ namespace Bankrupt.Model
             Possessions = new List<BoardHouse>();
         }
         public abstract PlayerType Type { get; }
-        public abstract bool  WantBuy(BoardHouse boardHouse);
+        public abstract bool  WantBuy { get; }
         public int Coins { get; set; }
         public BoardHouse CurrentBoardHouse  { get; set; }
         public bool Playing  { get; set; }

@@ -1,4 +1,5 @@
-﻿using Bankrupt.Model.Enum;
+﻿using System.Dynamic;
+using Bankrupt.Model.Enum;
 
 namespace Bankrupt.Model
 {
@@ -6,9 +7,6 @@ namespace Bankrupt.Model
     {
         public override PlayerType Type => PlayerType.Impulsive;
 
-        public override bool WantBuy(BoardHouse boardHouse)
-        {
-            return true;
-        }
+        public override bool WantBuy => true;
     }
 }
