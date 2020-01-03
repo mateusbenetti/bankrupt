@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Reflection.Metadata;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 using Bankrupt.Application.Resources;
-using Bankrupt.Model.Enum;
+using Bankrupt.Domain.Model.Enum;
 
-namespace Bankrupt.Application.Model
+namespace Bankrupt.Application.ViewModel
 {
     public class GameResultView
     {

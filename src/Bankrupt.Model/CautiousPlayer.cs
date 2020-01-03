@@ -1,6 +1,6 @@
-﻿using Bankrupt.Model.Enum;
+﻿using Bankrupt.Domain.Model.Enum;
 
-namespace Bankrupt.Model
+namespace Bankrupt.Domain.Model
 {
     public class CautiousPlayer : Player
     {

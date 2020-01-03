@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Bankrupt.Application.Model;
-using Bankrupt.Model;
+using Bankrupt.Application.ViewModel;
+using Bankrupt.Domain.Model;
 
 namespace Bankrupt.Application.Mapper
 {

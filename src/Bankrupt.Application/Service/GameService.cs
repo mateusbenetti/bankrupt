@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
 using Bankrupt.Application.Interface;
-using Bankrupt.Application.Model;
 using Bankrupt.Application.Resources;
+using Bankrupt.Application.ViewModel;
 using Bankrupt.Domain.Interface;
-using Bankrupt.Domain.Resources;
-using Bankrupt.Model;
-using Bankrupt.Model.Enum;
-using Bankrupt.Model.Interface;
+using Bankrupt.Domain.Model;
+using Bankrupt.Domain.Model.Enum;
+using Bankrupt.Domain.Model.Interface;
 
 namespace Bankrupt.Application.Service
 {

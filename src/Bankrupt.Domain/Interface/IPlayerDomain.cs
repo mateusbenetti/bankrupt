@@ -1,5 +1,5 @@
-﻿using Bankrupt.Model;
-using Bankrupt.Model.Interface;
+﻿using Bankrupt.Domain.Model;
+using Bankrupt.Domain.Model.Interface;
 
 namespace Bankrupt.Domain.Interface
 {

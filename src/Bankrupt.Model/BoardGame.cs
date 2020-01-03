@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Bankrupt.Model.Interface;
+using Bankrupt.Domain.Model.Interface;
 
-namespace Bankrupt.Model
+namespace Bankrupt.Domain.Model
 {
     public class BoardGame
     {

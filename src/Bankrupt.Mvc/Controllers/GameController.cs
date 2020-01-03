@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Bankrupt.Application.Interface;
-using Bankrupt.Application.Model;
+using Bankrupt.Application.ViewModel;
 using Bankrupt.Mvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;

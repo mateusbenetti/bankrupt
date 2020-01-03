@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Bankrupt.Application.Model;
-using Bankrupt.Model.Enum;
+using Bankrupt.Application.ViewModel;
+using Bankrupt.Domain.Model.Enum;
 
 namespace Bankrupt.Application.Interface
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Bankrupt.Model.Enum;
+using Bankrupt.Domain.Model.Enum;
 
-namespace Bankrupt.Model.Interface
+namespace Bankrupt.Domain.Model.Interface
 {
     public interface IPlayer
     {

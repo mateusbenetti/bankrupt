@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Bankrupt.Model.Enum;
-using Bankrupt.Model.Interface;
+using Bankrupt.Domain.Model.Enum;
+using Bankrupt.Domain.Model.Interface;
 
-namespace Bankrupt.Model
+namespace Bankrupt.Domain.Model
 {
     public abstract class Player : IPlayer
     {

@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using Bankrupt.Domain.Interface;
 using Bankrupt.Domain.Resources;
-using Bankrupt.Model;
-using Bankrupt.Model.Enum;
-using Bankrupt.Model.Interface;
+using Bankrupt.Domain.Model;
+using Bankrupt.Domain.Model.Enum;
+using Bankrupt.Domain.Model.Interface;
 
 namespace Bankrupt.Domain
 {

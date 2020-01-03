@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Bankrupt.Model.Interface;
+using Bankrupt.Domain.Model.Interface;
 
-namespace Bankrupt.Model
+namespace Bankrupt.Domain.Model
 {
    public class BoardHouse
     {

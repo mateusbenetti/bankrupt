@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bankrupt.Model.Enum
+namespace Bankrupt.Domain.Model.Enum
 {
     public enum  PlayerType
     {
