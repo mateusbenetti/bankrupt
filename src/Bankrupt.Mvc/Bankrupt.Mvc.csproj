@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bankrupt.Data\Bankrupt.Data.csproj" />
     <ProjectReference Include="..\Bankrupt.Infra.IoC\Bankrupt.CrossCutting.IoC.csproj" />
   </ItemGroup>
 

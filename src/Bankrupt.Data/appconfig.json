@@ -3,12 +3,11 @@
     "DefaultConnection": "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\mateus.benetti\\Documents\\bankrupt\\db\\Bankrupt.mdf;Integrated Security=True;Connect Timeout=30"
   },
   "Logging": {
+    "IncludeScopes": false,
     "LogLevel": {
-      "Default": "Warning"
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
     }
-  },
-  "AllowedHosts": "*",
-  "ApplicationSettings": {
-    "GameConfigFilePath": "C:\\Users\\mateus.benetti\\Documents\\bankrupt\\src\\gameConfig.txt"
   }
 }

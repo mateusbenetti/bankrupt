@@ -46,8 +46,14 @@ namespace Bankrupt.Domain
                 WinnerType = GetWinner(boardGame)
             };
             boardGame.Result = boardGameResult;
+            SaveGame(boardGame);
         }
-   
+
+        private void SaveGame(BoardGame boardGame)
+        {
+            throw new NotImplementedException();
+        }
+
         private static IList<BoardHouse> BuildBoardHouseCollection(string pathConfigFile)
         {
             IList<BoardHouse> houses = new List<BoardHouse>();
