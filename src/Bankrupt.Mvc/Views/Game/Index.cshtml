@@ -43,7 +43,6 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col col-lg-10">
-                        
                     </div>
                     <div class="col col-lg-2">
                         <a class="btn btn-primary" asp-area="" asp-controller="Game" asp-action="Index">Nova Simulação.</a>
@@ -52,6 +51,7 @@
                 <div class="row">
                     <div class="col col-lg-6">
                         <ul>
+                            <li>Simulação: @Model.RegisterCode</li>
                             <li>Total de partidas analisadas: @Model.NumberOfGames</li>
                             <li>Máximo de rodados por partidas: @Model.MaxRoundByGames</li>
                             <li>Número de partidas terminadas por Timeout: @Model.AmountFinishedByTimeout</li>

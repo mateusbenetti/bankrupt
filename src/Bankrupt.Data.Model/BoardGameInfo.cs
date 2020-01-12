@@ -6,9 +6,12 @@ namespace Bankrupt.Data.Model
     public class BoardGameInfo
     {
         public Guid Id { get; set; }
-        public int Round { get; set; }
-        public DateTime Date { get; set; }
+        public int NumberRound { get; set; }
+        public Guid WinnerId { get; set; }
         public PlayerInfo Winner { get; set; }
+        public string RegisterCode { get; set; }
         public ICollection<BoardHouseInfo> BoardHouses { get; set; }
+        public Guid StatisticalAnalysisId { get; set; }
+        public StatisticalAnalysisInfo StatisticalAnalysis { get; set; }
     }
 }

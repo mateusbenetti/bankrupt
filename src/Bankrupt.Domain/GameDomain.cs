@@ -7,20 +7,29 @@ using Bankrupt.Domain.Resources;
 using Bankrupt.Domain.Model;
 using Bankrupt.Domain.Model.Enum;
 using Bankrupt.Domain.Model.Interface;
+using Bankrupt.Data.Model.Interface;
+using Bankrupt.Data.Model;
+using Bankrupt.Data.Model.Enum;
 
 namespace Bankrupt.Domain
 {
     public class GameDomain : IGameDomain
     {
         private readonly IPlayerDomain _playerDomain;
-        public GameDomain(IPlayerDomain playerDomain)
+        private readonly IBoardGameRepository _boardGameRepository;
+        private readonly IPlayerRepository _playerRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        public GameDomain(IPlayerDomain playerDomain, IPlayerRepository playerRepository, IUnitOfWork unitOfWork, IBoardGameRepository boardGameRepository)
         {
             _playerDomain = playerDomain;
+            _unitOfWork = unitOfWork;
+            _playerRepository = playerRepository;
+            _boardGameRepository = boardGameRepository;
         }
 
-        public BoardGame StartGame(IDictionary<int, IPlayer> players, string pathConfigFile, int? maxRound)
+        public BoardGame StartGame(IDictionary<int, IPlayer> players, string pathConfigFile, int? maxRound, string registerCode)
         {
-            var boardGame = new BoardGame(players, BuildBoardHouseCollection(pathConfigFile), maxRound);
+            var boardGame = new BoardGame(players, BuildBoardHouseCollection(pathConfigFile), maxRound, registerCode);
             boardGame.LastBoardHouse.Next = boardGame.FirstBoardHouse;
             PutPlayersInBoardGame(players, boardGame);
             return boardGame;
@@ -51,7 +60,38 @@ namespace Bankrupt.Domain
 
         private void SaveGame(BoardGame boardGame)
         {
-            throw new NotImplementedException();
+            _boardGameRepository.Add(new BoardGameInfo()
+            {
+                Id = Guid.NewGuid(),
+                RegisterCode = boardGame.RegisterCode,
+                NumberRound = boardGame.Round,
+                WinnerId = BuildWinner(boardGame.Result.WinnerType),
+            });
+            _unitOfWork.Commit();
+        }
+
+        private Guid BuildWinner(PlayerType winnerType)
+        {
+            var playerTypeEnum = ConvertPlayerType(winnerType);
+            var playerInfo = _playerRepository.GetPlayer(playerTypeEnum);
+            return playerInfo.Id;
+        }
+
+        private PlayerTypeEnum ConvertPlayerType(PlayerType winnerType)
+        {
+            switch (winnerType)
+            {
+                case PlayerType.Random:
+                    return PlayerTypeEnum.Random;
+                case PlayerType.Impulsive:
+                    return PlayerTypeEnum.Impulsive;
+                case PlayerType.Cautious:
+                    return PlayerTypeEnum.Cautious;
+                case PlayerType.Demanding:
+                    return PlayerTypeEnum.Demanding;
+                default:
+                    return PlayerTypeEnum.None;
+            }
         }
 
         private static IList<BoardHouse> BuildBoardHouseCollection(string pathConfigFile)

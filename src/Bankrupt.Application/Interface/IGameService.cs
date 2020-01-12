@@ -10,5 +10,6 @@ namespace Bankrupt.Application.Interface
         IDictionary<PlayerType, string> GetPlayerTypes();
         int GetMaxRoundsByGame();
         int GetNumberOfGames();
+        IList<GameResultDetailView> GetGameResultDetails(string registerCode);
     }
 }

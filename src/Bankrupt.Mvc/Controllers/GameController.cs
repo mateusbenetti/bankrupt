@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Bankrupt.Application.Interface;
 using Bankrupt.Application.ViewModel;
@@ -30,12 +31,18 @@ namespace Bankrupt.Mvc.Controllers
                 AmountFinishedByTimeout = results.Count(p => p.TimeOut),
                 AverageRounds = results.Sum(p => p.Rounds) / numberOfGames,
                 NumberOfGames = numberOfGames,
-                MaxRoundByGames = maxRounds
+                MaxRoundByGames = maxRounds,
+                RegisterCode = results.First().RegisterCode
             };
             model.PlayersTypeMostWinner = GetPlayersTypeMostWinner(model.WinsByPlayerType);
             return View(model);
         }
 
+        public IActionResult Details(string registerCode)
+        {
+            var model = _service.GetGameResultDetails(registerCode);
+            return View(model);
+        }
         private static IDictionary<string, int> GetPercentWinByPlayerType(IGameService service, IList<GameResultView> result)
         {
             return service.GetPlayerTypes().

@@ -6,6 +6,7 @@ namespace Bankrupt.Application.ViewModel
 {
     public class GameResultView
     {
+        public string RegisterCode { get; set; }
         [Display(Name = "WinnerType", ResourceType = typeof(GameResultResource))]
         public PlayerType WinnerType { get; set; }
         [Display(Name = "Rounds", ResourceType = typeof(GameResultResource))]

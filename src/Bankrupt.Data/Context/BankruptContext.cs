@@ -17,6 +17,7 @@ namespace Bankrupt.Data.Context
         public DbSet<PlayerInfo> Players { get; set; }
         public DbSet<PossesionInfo> Possesions { get; set; }
         public DbSet<BoardHouseInfo> BoardHouses { get; set; }
+        public DbSet<StatisticalAnalysisInfo> StatisticalAnalysis { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,6 +30,16 @@ namespace Bankrupt.Data.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<BoardGameInfo>()
+                .HasOne(p => p.Winner)
+                .WithMany(g => g.GamesWins)
+                .HasForeignKey(p => p.WinnerId);
+
+            modelBuilder.Entity<BoardGameInfo>()
+             .HasOne(p => p.StatisticalAnalysis)
+             .WithMany(g => g.BoardGames)
+             .HasForeignKey(p => p.StatisticalAnalysisId);
+
             base.OnModelCreating(modelBuilder);
         }
     }

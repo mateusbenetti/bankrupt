@@ -17,19 +17,19 @@ namespace Bankrupt.CrossCutting.IoC
             // ASP.NET HttpContext dependency
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();        
 
-            // Application
-            services.AddScoped<IGameService, GameService>();
-
-            // Domain - Commands
-            services.AddScoped<IPlayerDomain, PlayerDomain>();
-            services.AddScoped<IGameDomain, GameDomain>();
-
             // DataBase
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             services.AddScoped<IBoardGameRepository, BoardGameRepository>();
             services.AddScoped<IBoardHouseRepository, BoardHouseRepository>();
             services.AddScoped<IPossesionRepository, PossesionRepository>();
+
+            // Domain - Commands
+            services.AddScoped<IPlayerDomain, PlayerDomain>();
+            services.AddScoped<IGameDomain, GameDomain>();
+
+            // Application
+            services.AddScoped<IGameService, GameService>();
         }
     }
 }

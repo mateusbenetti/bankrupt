@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Análise estatistica do Bankrupt!";
+}
+@model GameModel
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<div class="row">
+    <div class="col col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>@ViewData["Title"] -  @Model.RegisterCode</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col col-lg-10">
+                    </div>
+                    <div class="col col-lg-2">
+                        <a class="btn btn-primary" asp-area="" asp-controller="Game" asp-action="Index">Nova Simulação.</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-lg-12">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

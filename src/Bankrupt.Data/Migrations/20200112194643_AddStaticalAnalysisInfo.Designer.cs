@@ -4,14 +4,16 @@ using Bankrupt.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bankrupt.Data.Migrations
 {
     [DbContext(typeof(BankruptContext))]
-    partial class BankruptContextModelSnapshot : ModelSnapshot
+    [Migration("20200112194643_AddStaticalAnalysisInfo")]
+    partial class AddStaticalAnalysisInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,7 +110,7 @@ namespace Bankrupt.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StatisticalAnalysis");
+                    b.ToTable("StatisticalAnalysisInfo");
                 });
 
             modelBuilder.Entity("Bankrupt.Data.Model.BoardGameInfo", b =>

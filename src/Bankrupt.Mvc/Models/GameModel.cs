@@ -13,5 +13,6 @@ namespace Bankrupt.Mvc.Models
         public  List<string>  PlayersTypeMostWinner { get; set; }
         public  int NumberOfGames { get; set; }
         public  int MaxRoundByGames { get; set; }
+        public string RegisterCode { get; set; }
     }
 }

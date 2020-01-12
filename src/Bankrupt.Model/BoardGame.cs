@@ -6,11 +6,12 @@ namespace Bankrupt.Domain.Model
 {
     public class BoardGame
     {
-        public BoardGame(IDictionary<int, IPlayer> players, IList<BoardHouse> houses, int? maxRound)
+        public BoardGame(IDictionary<int, IPlayer> players, IList<BoardHouse> houses, int? maxRound, string registerCode)
         {
             BoardHouses = houses;
             Players = players;
             MaxRound = maxRound;
+            RegisterCode = registerCode;
         }
         public int? MaxRound { get; set; }
         public IList<BoardHouse> BoardHouses { get; set; }
@@ -27,5 +28,6 @@ namespace Bankrupt.Domain.Model
         public IDictionary<int, IPlayer> Players { get; set; }
         public BoardGameResult Result { get; set; }
         public int  Round  { get; set; }
+        public string RegisterCode { get; }
     }
 }

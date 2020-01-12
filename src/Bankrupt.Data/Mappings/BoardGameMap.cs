@@ -8,8 +8,7 @@ namespace Bankrupt.Data.Model.Repository
         public void Configure(EntityTypeBuilder<BoardGameInfo> builder)
         {
             builder.Property(p => p.Id).IsRequired();
-            builder.Property(p => p.Round).IsRequired();
-            builder.Property(p => p.Date).IsRequired();
+            builder.Property(p => p.NumberRound).IsRequired();
         }
     }
 }

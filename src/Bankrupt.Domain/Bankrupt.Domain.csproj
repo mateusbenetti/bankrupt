@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bankrupt.Data.Model\Bankrupt.Data.Model.csproj" />
     <ProjectReference Include="..\Bankrupt.Domain.Resources\Bankrupt.Domain.Resources.csproj" />
     <ProjectReference Include="..\Bankrupt.Model\Bankrupt.Domain.Model.csproj" />
   </ItemGroup>

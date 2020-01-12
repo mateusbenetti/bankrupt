@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using Bankrupt.Application.Interface;
 using Bankrupt.Application.Resources;
@@ -20,6 +21,12 @@ namespace Bankrupt.Application.Service
         {
             _domain = domain;
             _mapper = mapper;
+        }
+
+        public IList<GameResultDetailView> GetGameResultDetails(string registerCode)
+        {
+            var result = new List<GameResultDetailView>();
+            return result;
         }
 
         public int GetMaxRoundsByGame()
@@ -46,6 +53,7 @@ namespace Bankrupt.Application.Service
 
         public IList<GameResultView> PlayBankrupt(string pathConfig)
         {
+            string registerCode = BuildRegisterCode();
             IList<GameResultView> result = new List<GameResultView>();
             for (var i = 0; i < NumberOfGames; i++)
             {
@@ -56,12 +64,22 @@ namespace Bankrupt.Application.Service
                     { 3, new CautiousPlayer() },
                     { 4, new RandomPlayer() }
                 };
-                var game = _domain.StartGame(players, pathConfig, MaxRound);
+                var game = _domain.StartGame(players, pathConfig, MaxRound, registerCode);
                 _domain.LetsPlay(game);
                 _domain.FinishGame(game, MaxRound);
                 result.Add(_mapper.Map<GameResultView>(game.Result));
             }
             return result;
+        }
+        private string BuildRegisterCode()
+        {
+            string registerCode = "BKRPT0000" + DateTime.Now.Year.ToString("0000") +
+                DateTime.Now.Month.ToString("00") +
+                DateTime.Now.Day.ToString("00") +
+                DateTime.Now.Hour.ToString("00") +
+                DateTime.Now.Minute.ToString("00") +
+                DateTime.Now.Second.ToString("00");
+            return registerCode;
         }
     }
 }
