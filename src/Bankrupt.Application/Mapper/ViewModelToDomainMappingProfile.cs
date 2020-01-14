@@ -9,6 +9,7 @@ namespace Bankrupt.Application.Mapper
         public ViewModelToDomainMappingProfile()
         {
             CreateMap<GameResultView, BoardGameResult>();
+            CreateMap<GameResultRoundRegisters, BoardGameRoundRegister>();
         }
     }
 }

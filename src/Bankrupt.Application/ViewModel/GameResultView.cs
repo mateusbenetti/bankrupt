@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Bankrupt.Application.Resources;
 using Bankrupt.Domain.Model.Enum;
 
@@ -33,5 +34,6 @@ namespace Bankrupt.Application.ViewModel
                 }
             }
         }
+        public List<GameResultRoundRegisters> RoundRegisters { get; set; }
     }
 }

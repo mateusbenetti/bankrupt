@@ -2,5 +2,6 @@
 {
     public interface IStatisticalAnalysisRepository : IRepository<StatisticalAnalysisInfo>
     {
+        StatisticalAnalysisInfo GetRegisterCode(string registerCode);
     }
 }

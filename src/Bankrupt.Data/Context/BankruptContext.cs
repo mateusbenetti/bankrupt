@@ -15,10 +15,8 @@ namespace Bankrupt.Data.Context
         }
         public DbSet<BoardGameInfo> BoardGames { get; set; }
         public DbSet<PlayerInfo> Players { get; set; }
-        public DbSet<PossesionInfo> Possesions { get; set; }
-        public DbSet<BoardHouseInfo> BoardHouses { get; set; }
         public DbSet<StatisticalAnalysisInfo> StatisticalAnalysis { get; set; }
-
+        public DbSet<RoundRegisterInfo> RoundRegisters { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var config = new ConfigurationBuilder()
@@ -36,9 +34,19 @@ namespace Bankrupt.Data.Context
                 .HasForeignKey(p => p.WinnerId);
 
             modelBuilder.Entity<BoardGameInfo>()
-             .HasOne(p => p.StatisticalAnalysis)
-             .WithMany(g => g.BoardGames)
-             .HasForeignKey(p => p.StatisticalAnalysisId);
+                .HasOne(p => p.StatisticalAnalysis)
+                .WithMany(g => g.BoardGames)
+                .HasForeignKey(p => p.StatisticalAnalysisId);
+
+            modelBuilder.Entity<RoundRegisterInfo>()
+                .HasOne(p => p.PlayerInfo)
+                .WithMany(g => g.RoundRegisters)
+                .HasForeignKey(p => p.PlayerId);
+
+            modelBuilder.Entity<RoundRegisterInfo>()
+               .HasOne(p => p.BoardGameInfo)
+               .WithMany(g => g.RoundRegisters)
+               .HasForeignKey(p => p.BoardGameId);
 
             base.OnModelCreating(modelBuilder);
         }

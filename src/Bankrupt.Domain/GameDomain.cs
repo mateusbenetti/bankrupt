@@ -10,6 +10,8 @@ using Bankrupt.Domain.Model.Interface;
 using Bankrupt.Data.Model.Interface;
 using Bankrupt.Data.Model;
 using Bankrupt.Data.Model.Enum;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Bankrupt.Domain
 {
@@ -18,13 +20,20 @@ namespace Bankrupt.Domain
         private readonly IPlayerDomain _playerDomain;
         private readonly IBoardGameRepository _boardGameRepository;
         private readonly IPlayerRepository _playerRepository;
+        private readonly IStatisticalAnalysisRepository _statisticalAnalysisRepository;
+        private readonly IRoundRegisterRepository _roundRegisterRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public GameDomain(IPlayerDomain playerDomain, IPlayerRepository playerRepository, IUnitOfWork unitOfWork, IBoardGameRepository boardGameRepository)
+        public GameDomain(IPlayerDomain playerDomain, IUnitOfWork unitOfWork,
+            IPlayerRepository playerRepository,
+            IBoardGameRepository boardGameRepository,
+            IStatisticalAnalysisRepository statisticalAnalysisRepository, IRoundRegisterRepository roundRegisterRepository)
         {
             _playerDomain = playerDomain;
             _unitOfWork = unitOfWork;
             _playerRepository = playerRepository;
             _boardGameRepository = boardGameRepository;
+            _statisticalAnalysisRepository = statisticalAnalysisRepository;
+            _roundRegisterRepository = roundRegisterRepository;
         }
 
         public BoardGame StartGame(IDictionary<int, IPlayer> players, string pathConfigFile, int? maxRound, string registerCode)
@@ -34,43 +43,57 @@ namespace Bankrupt.Domain
             PutPlayersInBoardGame(players, boardGame);
             return boardGame;
         }
-        public void LetsPlay(BoardGame boardGame)
+        public void LetsPlay(BoardGame boardGame, Guid gameId)
         {
             bool continuePlaying;
             boardGame.Round = 1;
             do
             {
-                Round(boardGame, _playerDomain);
+                Round(boardGame, _playerDomain, gameId);
                 continuePlaying = ContinuePlaying(boardGame, boardGame.Round);
                 if (continuePlaying)
                     boardGame.Round++;
             } while (continuePlaying);
         }
-        public void FinishGame(BoardGame boardGame, int? maxRound)
+        public void FinishGame(BoardGame boardGame, int? maxRound, string registerCode, Guid gameId)
         {
             var boardGameResult = new BoardGameResult()
             {
                 Rounds = boardGame.Round,
                 TimeOut = maxRound.HasValue && maxRound == boardGame.Round,
-                WinnerType = GetWinner(boardGame)
+                WinnerType = GetWinner(boardGame),
+                RoundRegisters = boardGame.RoundRegisters.Select(p => new BoardGameRoundRegister()
+                {
+                    Action = p.Action,
+                    BoardHouseAfter = p.BoardHouseAfter,
+                    CoinsAfter = p.CoinsAfter,
+                    BoardGameId = p.BoardGameId,
+                    BoardHouseBefore = p.BoardHouseBefore,
+                    CoinsBefore = p.CoinsBefore,
+                    Player = p.Player
+                }).ToList()
             };
             boardGame.Result = boardGameResult;
-            SaveGame(boardGame);
+            SaveGame(boardGame, registerCode, gameId);
         }
 
-        private void SaveGame(BoardGame boardGame)
+        private void SaveGame(BoardGame boardGame, string registerCode, Guid gameId)
         {
+            var statisticalAnalysisInfo = _statisticalAnalysisRepository.GetRegisterCode(registerCode);
+            var registerRounds = new List<RoundRegisterInfo>();
             _boardGameRepository.Add(new BoardGameInfo()
             {
-                Id = Guid.NewGuid(),
+                Id = gameId,
                 RegisterCode = boardGame.RegisterCode,
                 NumberRound = boardGame.Round,
-                WinnerId = BuildWinner(boardGame.Result.WinnerType),
+                WinnerId = GetPlayer(boardGame.Result.WinnerType),
+                StatisticalAnalysisId = statisticalAnalysisInfo.Id,
+                RoundRegisters = registerRounds
             });
             _unitOfWork.Commit();
         }
 
-        private Guid BuildWinner(PlayerType winnerType)
+        private Guid GetPlayer(PlayerType winnerType)
         {
             var playerTypeEnum = ConvertPlayerType(winnerType);
             var playerInfo = _playerRepository.GetPlayer(playerTypeEnum);
@@ -151,12 +174,12 @@ namespace Bankrupt.Domain
                 player.Playing = true;
             }
         }
-        private static void Round(BoardGame boardGame, IPlayerDomain playerDomain)
+        private static void Round(BoardGame boardGame, IPlayerDomain playerDomain, Guid gameId)
         {
             var players = boardGame.Players.OrderBy(p => p.Key).Select(p => p.Value).ToList();
             foreach (var player in players)
             {
-                playerDomain.Play(player, boardGame);
+                playerDomain.Play(player, boardGame, gameId);
                 if (players.Count(p => p.Playing) == 1)
                     break;
             }
@@ -182,6 +205,32 @@ namespace Bankrupt.Domain
                     .First(p => p.Coins == maxCoins);
             }
             return winner.Type;
+        }
+        public void RegisterStatisticalAnalysis(string registerCode)
+        {
+            _statisticalAnalysisRepository.Add(new StatisticalAnalysisInfo()
+            {
+                Id = Guid.NewGuid(),
+                RegisterCode = registerCode,
+                Date = DateTime.Now
+            });
+            _unitOfWork.Commit();
+        }
+
+        public async Task SaveRegisterRoundAsync(BoardGameRoundRegister registerRound, CancellationToken cancellationToken)
+        {
+            _roundRegisterRepository.Add(new RoundRegisterInfo()
+            {
+                Action = registerRound.Action,
+                BoardGameId = registerRound.BoardGameId,
+                BoardHouseAfter = registerRound.BoardHouseAfter,
+                BoardHouseBefore = registerRound.BoardHouseBefore,
+                CoinsAfter = registerRound.CoinsAfter,
+                CoinsBefore = registerRound.CoinsBefore,
+                PlayerId = GetPlayer(registerRound.Player.Type)
+            });
+            _unitOfWork.Commit();
+            await Task.FromResult(true);
         }
     }
 }

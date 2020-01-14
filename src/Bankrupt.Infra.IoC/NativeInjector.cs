@@ -21,8 +21,8 @@ namespace Bankrupt.CrossCutting.IoC
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             services.AddScoped<IBoardGameRepository, BoardGameRepository>();
-            services.AddScoped<IBoardHouseRepository, BoardHouseRepository>();
-            services.AddScoped<IPossesionRepository, PossesionRepository>();
+            services.AddScoped<IStatisticalAnalysisRepository, StatisticalAnalysisRepository>();
+            services.AddScoped<IRoundRegisterRepository, RoundRegisterRepository>();
 
             // Domain - Commands
             services.AddScoped<IPlayerDomain, PlayerDomain>();

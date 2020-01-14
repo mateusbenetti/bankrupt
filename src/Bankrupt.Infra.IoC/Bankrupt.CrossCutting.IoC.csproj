@@ -12,6 +12,7 @@
     <ProjectReference Include="..\Bankrupt.Application\Bankrupt.Application.csproj" />
     <ProjectReference Include="..\Bankrupt.Data\Bankrupt.Data.csproj" />
     <ProjectReference Include="..\Bankrupt.Domain\Bankrupt.Domain.csproj" />
+    <ProjectReference Include="..\Bankrupt.Services\Bankrupt.Services.csproj" />
   </ItemGroup>
 
 </Project>

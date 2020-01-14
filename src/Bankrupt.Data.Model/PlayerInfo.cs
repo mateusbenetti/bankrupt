@@ -10,6 +10,6 @@ namespace Bankrupt.Data.Model
         public string Name { get; set; }
         public PlayerTypeEnum Type { get; set; }
         public ICollection<BoardGameInfo> GamesWins { get; set; }
-        public ICollection<PossesionInfo> Possesions { get; set; }
+        public ICollection<RoundRegisterInfo> RoundRegisters { get; set; }
     }
 }

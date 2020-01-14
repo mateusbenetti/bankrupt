@@ -41,26 +41,6 @@ namespace Bankrupt.Data.Migrations
                     b.ToTable("BoardGames");
                 });
 
-            modelBuilder.Entity("Bankrupt.Data.Model.BoardHouseInfo", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid?>("BoardGameId");
-
-                    b.Property<int>("PurchaseValue");
-
-                    b.Property<int>("RentValue");
-
-                    b.Property<int>("Sequential");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BoardGameId");
-
-                    b.ToTable("BoardHouses");
-                });
-
             modelBuilder.Entity("Bankrupt.Data.Model.PlayerInfo", b =>
                 {
                     b.Property<Guid>("Id")
@@ -75,26 +55,32 @@ namespace Bankrupt.Data.Migrations
                     b.ToTable("Players");
                 });
 
-            modelBuilder.Entity("Bankrupt.Data.Model.PossesionInfo", b =>
+            modelBuilder.Entity("Bankrupt.Data.Model.RoundRegisterInfo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("BoardGameId");
+                    b.Property<string>("Action");
 
-                    b.Property<Guid?>("BoardHouseId");
+                    b.Property<Guid>("BoardGameId");
 
-                    b.Property<Guid?>("PlayerId");
+                    b.Property<int>("BoardHouseAfter");
+
+                    b.Property<int>("BoardHouseBefore");
+
+                    b.Property<int>("CoinsAfter");
+
+                    b.Property<int>("CoinsBefore");
+
+                    b.Property<Guid>("PlayerId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BoardGameId");
 
-                    b.HasIndex("BoardHouseId");
-
                     b.HasIndex("PlayerId");
 
-                    b.ToTable("Possesions");
+                    b.ToTable("RoundRegisters");
                 });
 
             modelBuilder.Entity("Bankrupt.Data.Model.StatisticalAnalysisInfo", b =>
@@ -124,26 +110,17 @@ namespace Bankrupt.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Bankrupt.Data.Model.BoardHouseInfo", b =>
+            modelBuilder.Entity("Bankrupt.Data.Model.RoundRegisterInfo", b =>
                 {
-                    b.HasOne("Bankrupt.Data.Model.BoardGameInfo", "BoardGame")
-                        .WithMany("BoardHouses")
-                        .HasForeignKey("BoardGameId");
-                });
+                    b.HasOne("Bankrupt.Data.Model.BoardGameInfo", "BoardGameInfo")
+                        .WithMany("RoundRegisters")
+                        .HasForeignKey("BoardGameId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity("Bankrupt.Data.Model.PossesionInfo", b =>
-                {
-                    b.HasOne("Bankrupt.Data.Model.BoardGameInfo", "BoardGame")
-                        .WithMany()
-                        .HasForeignKey("BoardGameId");
-
-                    b.HasOne("Bankrupt.Data.Model.BoardHouseInfo", "BoardHouse")
-                        .WithMany()
-                        .HasForeignKey("BoardHouseId");
-
-                    b.HasOne("Bankrupt.Data.Model.PlayerInfo", "Player")
-                        .WithMany("Possesions")
-                        .HasForeignKey("PlayerId");
+                    b.HasOne("Bankrupt.Data.Model.PlayerInfo", "PlayerInfo")
+                        .WithMany("RoundRegisters")
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

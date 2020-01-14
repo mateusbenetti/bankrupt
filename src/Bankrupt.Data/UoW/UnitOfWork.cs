@@ -1,6 +1,7 @@
 ﻿using Bankrupt.Data.Context;
 using Bankrupt.Data.Model.Interface;
 using System;
+using System.Threading.Tasks;
 
 namespace Bankrupt.Data.UoW
 {
@@ -15,7 +16,11 @@ namespace Bankrupt.Data.UoW
         {
             return _bankruptContext.SaveChanges() > 0;
         }
-
+        async Task<bool> IUnitOfWork.CommitAsync()
+        {
+            var result = await _bankruptContext.SaveChangesAsync() > 0;
+            return result;
+        }
         public void Dispose()
         {
             GC.SuppressFinalize(this);

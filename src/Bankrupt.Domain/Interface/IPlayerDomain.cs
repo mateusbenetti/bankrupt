@@ -5,6 +5,6 @@ namespace Bankrupt.Domain.Interface
 {
     public interface IPlayerDomain
     {
-        void Play(IPlayer player, BoardGame boardGame);
+        void Play(IPlayer player, BoardGame boardGame, System.Guid gameId);
     }
 }

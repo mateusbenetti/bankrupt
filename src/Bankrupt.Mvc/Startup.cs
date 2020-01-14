@@ -44,7 +44,6 @@ namespace Bankrupt.Mvc
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
             services.AddAutoMapperSetup();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             RegisterServices(services);
@@ -77,6 +76,7 @@ namespace Bankrupt.Mvc
 
         private static void RegisterServices(IServiceCollection services)
         {
+            HostedServiceInjector.ConfigureServices(services);
             NativeInjector.RegisterServices(services);
         }
     }

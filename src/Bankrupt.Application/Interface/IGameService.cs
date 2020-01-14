@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Bankrupt.Application.ViewModel;
 using Bankrupt.Domain.Model.Enum;
 
@@ -10,6 +12,6 @@ namespace Bankrupt.Application.Interface
         IDictionary<PlayerType, string> GetPlayerTypes();
         int GetMaxRoundsByGame();
         int GetNumberOfGames();
-        IList<GameResultDetailView> GetGameResultDetails(string registerCode);
+        Task SaveRegisterRound(GameResultRoundRegisters item, CancellationToken token);
     }
 }
